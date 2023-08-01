@@ -10,15 +10,13 @@ At **BUILD** time, `veritable-portal` is configured using environment variables 
 
 | variable     | required |                          default                           | description                                                   |
 | :----------- | :------: | :--------------------------------------------------------: | :------------------------------------------------------------ |
-| MAPBOX_TOKEN |    Y     |                             -                              | Required to render the map. Token for your Mapbox account     |
-| MAPBOX_STYLE |    N     | `mapbox://styles/digicat-mapbox/clcja9aj6001d14o3yn7wvowa` | Map [style](https://docs.mapbox.com/mapbox-gl-js/style-spec/) |
+|   EXAMPLE    |    Y     |                             -                              | An example environment variable     |
 
 At **RUNTIME**, edit [`config.js`](./public/config.js). Default values:
 
 ```js
 {
-  mapboxToken: 'YOUR_TOKEN',
-  mapboxStyle: 'mapbox://styles/digicat-mapbox/clcja9aj6001d14o3yn7wvowa',
+    publicBasePath: '/',
 }
 ```
 

@@ -1,6 +1,6 @@
 {
   "name": "@digicatapult/veritable-portal",
-  "version": "0.15.8",
+  "version": "0.0.1",
   "description": "User interface for veritable project",
   "homepage": "https://digicatapult.github.io/veritable-portal/",
   "main": "src/index.js",

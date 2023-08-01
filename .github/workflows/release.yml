@@ -187,7 +187,6 @@ jobs:
       - name: Build site
         run: npm run build
         env:
-          MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
           PUBLIC_BASE_PATH: /veritable-portal
       - name: Deploy Site
         uses: peaceiris/actions-gh-pages@v3
