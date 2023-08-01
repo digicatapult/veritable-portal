@@ -1,0 +1,1 @@
+const config={publicBasePath:"/"};Window.config||(Window.config={}),Window.config=Object.keys(config).reduce(((n,o)=>(n.hasOwnProperty(o)||(n[o]=config[o]),n)),{});
