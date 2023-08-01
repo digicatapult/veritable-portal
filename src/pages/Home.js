@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { Grid, AppBar } from '@digicatapult/ui-component-library'
 
-
 const FullScreenGrid = styled(Grid)`
   height: 100vh;
   width: 100vw;
@@ -43,8 +42,7 @@ export default function Home() {
       <Grid.Panel area="body">
         <h1>body placeholder</h1>
       </Grid.Panel>
-      <Grid.Panel area="main" style={{ position: 'relative' }}>
-      </Grid.Panel>
+      <Grid.Panel area="main" style={{ position: 'relative' }}></Grid.Panel>
     </FullScreenGrid>
   )
 }
