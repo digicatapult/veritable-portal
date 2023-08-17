@@ -1,14 +1,19 @@
 import React from 'react'
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import { Routes, Route, createBrowserRouter } from 'react-router-dom'
+
 import Home from '../pages/Home'
-import { PUBLIC_BASE_PATH } from './env'
+import Issue from '../pages/Issue'
+
+export const router = createBrowserRouter([
+  { path: '*', Component: Home },
+  { path: '/issue', Component: Issue },
+])
 
 export default function Router() {
   return (
-    <BrowserRouter basename={PUBLIC_BASE_PATH}>
-      <Routes>
-        <Route exec path={'/'} element={<Home />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route exec path={'/'} element={<Home />} />
+      <Route exec path={'/issue'} element={<Issue />} />
+    </Routes>
   )
 }
