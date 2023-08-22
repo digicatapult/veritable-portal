@@ -1,5 +1,5 @@
 import React from 'react'
-import { DropDown, Section } from '@digicatapult/ui-component-library'
+import { DropDown, Section, Grid } from '@digicatapult/ui-component-library'
 
 import { checks } from '.'
 import { Button, Input } from '../../components/shared'
@@ -21,19 +21,31 @@ export default function ChecksForm({ inputs, handleSubmit, setStage }) {
           update={(val) => setSelected((prev) => [...prev, val])}
           options={checks.filter((el) => !selected.includes(el))}
         />
-        {selected.map(
-          (el) => (
-            (
+        {selected.map((el) => (
+          <Grid
+            areas={[
+              ['check', 'check'],
+              ['expiry', 'order'],
+            ]}
+            rows={['minmax(0, 1fr)']}
+            columns={['1fr', '1fr']}
+          >
+            <Grid.Panel area="check">
               <Input
                 key={el.value}
                 type="text"
                 name={el.value}
                 value={el.label}
               />
-            ),
-            (<input type="date" />)
-          )
-        )}
+            </Grid.Panel>
+            <Grid.Panel area="expiry">
+              <input type="date" />
+            </Grid.Panel>
+            <Grid.Panel area="order">
+              <input style={{ marginBottom: '6px' }} type="date" />
+            </Grid.Panel>
+          </Grid>
+        ))}
         <Button
           onClick={(e) => {
             e.preventDefault()

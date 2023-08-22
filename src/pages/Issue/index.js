@@ -34,7 +34,7 @@ const Content = styled('Grid')`
 
 export default function Issue() {
   const [inputs, setInputs] = React.useState({})
-  const [stage, setStage] = React.useState(0)
+  const [stage, setStage] = React.useState(1)
   const [fetching, isFetching] = React.useState(false)
 
   React.useEffect(() => {
