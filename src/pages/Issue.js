@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { DropDown, Grid, Section } from '@digicatapult/ui-component-library'
+import { DropDown, Section } from '@digicatapult/ui-component-library'
+import Spinner from '../components/Spinner'
 
 const checks = [
   {
@@ -25,68 +26,140 @@ const checks = [
   },
 ]
 
+const Button = styled('button')`
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid #000;
+  background: #fff;
+  margin-right: 3px;
+  box-shadow: 0px 2px 0px 0px #000;
+`
+
 const Input = styled('input')`
   width: 100%;
-  height: 25px;
+  height: 35px;
+  margin-bottom: 5px;
+  text-align: center;
+  border-radius: 2px;
+  border: 1px solid var(--black, #000);
+  background: var(--white, #fff);
 `
 
 const Content = styled('Grid')`
   padding: 20px 0px;
+  text-align: center;
 `
 
+// TODO move
+const ChecksForm = ({ inputs, handleSubmit, setStage }) => {
+  const [selected, setSelected] = React.useState(inputs.checks || [])
+
+  return (
+    <Section
+      margin={'2px 5px'}
+      headingLevel={1}
+      background={'#FFF'}
+      title={'Please add the check(s) passed.'}
+    >
+      <form onSubmit={handleSubmit}>
+        <DropDown
+          selected={selected}
+          placeholder="select check"
+          update={(val) => setSelected((prev) => [...prev, val])}
+          options={checks.filter((el) => !selected.includes(el))}
+        />
+        {selected.map((el) => (
+          <Input key={el.value} type="text" name={el.value} value={el.label} />
+        ))}
+        <Button
+          onClick={(e) => {
+            e.preventDefault()
+            setStage((prev) => prev - 1)
+          }}
+        >
+          {'<'}
+        </Button>
+        <Button type="submit">Next</Button>
+      </form>
+    </Section>
+  )
+}
+
+// TODO move
+const CompanyDetailsForm = ({ handleSubmit, inputs }) => (
+  <form onSubmit={handleSubmit}>
+    <Section
+      margin={'2px 0px'}
+      headingLevel={1}
+      background={'#FFF'}
+      title={'Add Supplier Company Details'}
+    >
+      <span style={{ fontSize: '8px' }}>Enter details</span>
+    </Section>
+    <Section margin={'2px 0px'} headingLevel={2} background={'#FFF'}>
+      <Input
+        type="text"
+        required
+        name="name"
+        value={inputs.name}
+        placeholder="Company name"
+      />
+      <Input
+        required
+        type="number"
+        name={'houseNo'}
+        value={inputs.houseNo}
+        placeholder="Company house no."
+      />
+      <Input
+        type="email"
+        required
+        value={inputs.email}
+        name="email"
+        placeholder="Contact email"
+      />
+      <Button type="submit" style={{ marginTop: '25px', marginLeft: '2px' }}>
+        Next
+      </Button>
+    </Section>
+  </form>
+)
+
 export default function Issue() {
-  const [selected, setSelected] = React.useState([])
-  const update = (val) => {
-    const uniq =
-      [...selected, val].filter((el, i, arr) => arr.indexOf(el) === i) || []
-    setSelected(uniq)
+  const [inputs, setInputs] = React.useState({})
+  const [stage, setStage] = React.useState(1)
+  const [fetching, isFetching] = React.useState(false)
+
+  React.useEffect(() => {
+    new Promise((r) => setTimeout(r, 1000)).then(() => {
+      isFetching(false)
+    })
+  }, [inputs])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    isFetching(true)
+    setInputs((prev) => ({
+      ...prev,
+      ...Object.fromEntries(new FormData(e.target)),
+    }))
+    setStage((prev) => prev + 1)
   }
+
+  if (fetching) return <Spinner />
 
   return (
     <Content>
-      <Section
-        margin={'2px 0px'}
-        headingLevel={1}
-        title={'Add Supplier Company name'}
-      >
-        <Input type="text" />
-      </Section>
-      <Section
-        margin={'2px 0px'}
-        headingLevel={2}
-        height={'100px'}
-        title={'Please add the check(s) passed'}
-      >
-        <DropDown
-          selected={selected}
-          update={update}
-          options={checks.filter((el) => !selected.includes(el))}
+      {stage === 0 && (
+        <CompanyDetailsForm inputs={inputs} handleSubmit={handleSubmit} />
+      )}
+      {stage === 1 && (
+        <ChecksForm
+          setStage={setStage}
+          inputs={inputs}
+          handleSubmit={handleSubmit}
         />
-      </Section>
-      {selected.map((el) => {
-        return (
-          <Grid
-            key={el.value}
-            style={{
-              textAlign: 'center',
-              border: 'solid 1px',
-              lineHeight: '25px',
-              marginTop: '2px',
-            }}
-            areas={[['label', 'button']]}
-            columns={['1fr', 'minmax(10%, 20%)']}
-            rows={['25px']}
-          >
-            <Grid.Panel area="label">
-              <div>{el.label}</div>
-            </Grid.Panel>
-            <Grid.Panel area="button">
-              <div style={{ cursor: 'pointer', width: '20px' }}>x</div>
-            </Grid.Panel>
-          </Grid>
-        )
-      })}
-      {selected.length > 0 && <button>Next</button>}
+      )}
     </Content>
   )
 }
