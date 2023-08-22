@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { RouterProvider } from 'react-router-dom'
 
-import { router } from '../utils/Router'
-import { Grid /*, AppBar */ } from '@digicatapult/ui-component-library'
+import { router } from './utils/Router'
+import { Grid } from '@digicatapult/ui-component-library'
 
 const FullScreenGrid = styled(Grid)`
   height: 100vh;
@@ -32,20 +32,7 @@ export default function App() {
     >
       <Grid.Panel area="header">
         <PageTitle>- VERITABLE -</PageTitle>
-        {/*<AppBar
-          shadow={false}
-          theme={{
-            primary: '#000',
-            accent: '#FFF',
-          }}
-        >
-          <AppBar.Item active={location === '/home'} href="/home">
-            HOME
-          </AppBar.Item>
-          <AppBar.Item active={location === '/issue'} href="/issue">
-            ISSUE CREDENTIAL
-          </AppBar.Item>
-        </AppBar>*/}
+        {/* <AppBar location={location} /> in case we want nav bar*/}
       </Grid.Panel>
       <Grid.Panel justifySelf="center" area="main">
         <RouterProvider router={router} />
