@@ -40,7 +40,7 @@ export default function ChecksForm({ inputs, handleSubmit, setStage }) {
       background={'#FFF'}
       title={'Please add the check(s) passed.'}
     >
-      <form onSubmit={handleSubmit}>
+      <form style={{ textAlign: 'center' }} onSubmit={handleSubmit}>
         <input type="hidden" value={JSON.stringify(selected)} name="checks" />
         <DropDown
           selected={selected}
@@ -59,12 +59,29 @@ export default function ChecksForm({ inputs, handleSubmit, setStage }) {
               />
             </Grid.Panel>
             <Grid.Panel area="expiry">
-              <DatePicker name="expiry" type="date" />
+              <DatePicker
+                onChange={(e) => {
+                  e.preventDefault()
+                  setSelected((prev) => [
+                    ...prev.filter((item) => item.name !== el.name),
+                    { ...el, expiry: e.target.value },
+                  ])
+                }}
+                name="expiry"
+                type="date"
+              />
             </Grid.Panel>
             <Grid.Panel area="issuance">
               <DatePicker
-                /* TODO persist and find one */ name="issuance"
                 type="date"
+                name="issuance"
+                onChange={(e) => {
+                  e.preventDefault()
+                  setSelected((prev) => [
+                    ...prev.filter((item) => item.name !== el.name),
+                    { ...el, issuance: e.target.value },
+                  ])
+                }}
               />
             </Grid.Panel>
           </Grid>
