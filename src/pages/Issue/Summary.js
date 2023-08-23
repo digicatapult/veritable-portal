@@ -145,14 +145,7 @@ export default function Summary({ inputs, setStage, handleSubmit }) {
           >
             {'<'}
           </Button>
-          <Button
-            onClick={(e) => {
-              e.preventDefault()
-              return handleSubmit(e, {})
-            }}
-          >
-            {'Confirm >'}
-          </Button>
+          <Button onClick={handleSubmit}>{'Confirm >'}</Button>
         </Row>
       </Grid.Panel>
     </Grid>
