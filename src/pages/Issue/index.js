@@ -25,37 +25,24 @@ export default function Issue() {
     e.preventDefault()
     isFetching(true)
 
-    const data = Object.fromEntries(new FormData(e.target))
+    const { checks, ...data } = Object.fromEntries(new FormData(e.target))
 
     setInputs((prev) => ({
       ...prev,
       ...data,
-      checks: data.checks ? JSON.parse(data.checks) : undefined,
+      checks: checks ? JSON.parse(checks) : undefined,
     }))
     setStage((prev) => prev + 1)
   }
 
+  const sharedProps = { setStage, inputs, handleSubmit }
   if (fetching) return <Spinner />
 
   return (
     <Content>
-      {stage === 0 && (
-        <CompanyDetailsForm inputs={inputs} handleSubmit={handleSubmit} />
-      )}
-      {stage === 1 && (
-        <ChecksForm
-          setStage={setStage}
-          inputs={inputs}
-          handleSubmit={handleSubmit}
-        />
-      )}
-      {stage === 2 && (
-        <Summary
-          setStage={setStage}
-          inputs={inputs}
-          handleSubmit={handleSubmit}
-        />
-      )}
+      {stage === 0 && <CompanyDetailsForm {...sharedProps} />}
+      {stage === 1 && <ChecksForm {...sharedProps} />}
+      {stage === 2 && <Summary {...sharedProps} />}
     </Content>
   )
 }
