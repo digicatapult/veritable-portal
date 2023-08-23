@@ -1,33 +1,10 @@
 import React from 'react'
-import styled from 'styled-componentyys'
+import styled from 'styled-components'
 
 import Spinner from '../../components/Spinner'
 import ChecksForm from './ChecksForm'
 import CompanyDetailsForm from './CompanyDetailsForm'
 import Summary from './Summary'
-
-export const checks = [
-  {
-    value: 'check-1',
-    label: 'temporary check 1',
-  },
-  {
-    value: 'check-2',
-    label: 'temporary check 2',
-  },
-  {
-    value: 'check-3',
-    label: 'temporary check 3',
-  },
-  {
-    value: 'check-4',
-    label: 'temporary check 4',
-  },
-  {
-    value: 'check-5',
-    label: 'temporary check 5',
-  },
-]
 
 const Content = styled('Grid')`
   padding: 20px 0px;
@@ -48,10 +25,12 @@ export default function Issue() {
     e.preventDefault()
     isFetching(true)
 
+    const data = Object.fromEntries(new FormData(e.target))
+
     setInputs((prev) => ({
       ...prev,
-      ...Object.fromEntries(new FormData(e.target)),
-      checks: JSON.parse(Object.fromEntries(new FormData(e.target)).checks),
+      ...data,
+      checks: data.checks ? JSON.parse(data.checks) : undefined,
     }))
     setStage((prev) => prev + 1)
   }

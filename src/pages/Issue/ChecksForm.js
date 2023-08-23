@@ -2,7 +2,7 @@ import React from 'react'
 import { DropDown, Section, Grid } from '@digicatapult/ui-component-library'
 import styled from 'styled-components'
 
-import { checks } from '.'
+import { checks } from './fixtures'
 import { Button, Input } from '../../components/shared'
 
 const DatePicker = styled('input')`

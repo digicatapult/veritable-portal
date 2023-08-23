@@ -4,7 +4,7 @@ import { Input, Button } from '../../components/shared'
 
 export default function CompanyDetailsForm({ handleSubmit, inputs }) {
   return (
-    <form onSubmit={handleSubmit}>
+    <form style={{ textAlign: 'center' }} onSubmit={handleSubmit}>
       <Section
         margin={'2px 0px'}
         headingLevel={1}
