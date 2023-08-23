@@ -1,8 +1,34 @@
 import React from 'react'
 import { DropDown, Section, Grid } from '@digicatapult/ui-component-library'
+import styled from 'styled-components'
 
 import { checks } from '.'
 import { Button, Input } from '../../components/shared'
+
+const DatePicker = styled('input')`
+  display: flex;
+  height: 31px;
+  padding: 0px 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 2px;
+  border: 1px solid var(--black, #000);
+  background: var(--white, #fff);
+`
+
+const layout = {
+  style: {
+    padding: '5px 0px',
+    textAlign: 'center',
+  },
+  areas: [
+    ['check', 'check'],
+    ['expiry', 'issuance'],
+  ],
+  rows: ['minmax(0, 1fr)'],
+  columns: ['1fr', '1fr'],
+}
 
 export default function ChecksForm({ inputs, handleSubmit, setStage }) {
   const [selected, setSelected] = React.useState(inputs.checks || [])
@@ -15,6 +41,7 @@ export default function ChecksForm({ inputs, handleSubmit, setStage }) {
       title={'Please add the check(s) passed.'}
     >
       <form onSubmit={handleSubmit}>
+        <input type="hidden" value={JSON.stringify(selected)} name="checks" />
         <DropDown
           selected={selected}
           placeholder="select check"
@@ -22,14 +49,7 @@ export default function ChecksForm({ inputs, handleSubmit, setStage }) {
           options={checks.filter((el) => !selected.includes(el))}
         />
         {selected.map((el) => (
-          <Grid
-            areas={[
-              ['check', 'check'],
-              ['expiry', 'order'],
-            ]}
-            rows={['minmax(0, 1fr)']}
-            columns={['1fr', '1fr']}
-          >
+          <Grid key={el} {...layout}>
             <Grid.Panel area="check">
               <Input
                 key={el.value}
@@ -39,10 +59,13 @@ export default function ChecksForm({ inputs, handleSubmit, setStage }) {
               />
             </Grid.Panel>
             <Grid.Panel area="expiry">
-              <input type="date" />
+              <DatePicker name="expiry" type="date" />
             </Grid.Panel>
-            <Grid.Panel area="order">
-              <input style={{ marginBottom: '6px' }} type="date" />
+            <Grid.Panel area="issuance">
+              <DatePicker
+                /* TODO persist and find one */ name="issuance"
+                type="date"
+              />
             </Grid.Panel>
           </Grid>
         ))}
