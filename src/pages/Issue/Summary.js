@@ -18,7 +18,7 @@ const WarnBox = styled('div')`
   flex-shrink: 0;
   color: #000;
   font-family: Roboto Mono;
-  font-size: 6px;
+  font-size: 8px;
   font-style: italic;
   font-weight: 400;
   line-height: normal;
@@ -26,15 +26,15 @@ const WarnBox = styled('div')`
 
 const Th = styled('th')`
   font-style: italic;
-  font-size: 8px;
+  font-size: 10px;
 `
 
 const Td = styled('td')`
-  font-size: 8px;
+  font-size: 10px;
   align-text: center;
 `
 
-export default function Summary({ inputs, setStage, handleSubmit }) {
+export default function Summary({ inputs, setStage /*, handleSubmit */ }) {
   return (
     <Grid
       gap={'10px'}
@@ -49,7 +49,7 @@ export default function Summary({ inputs, setStage, handleSubmit }) {
           background={'#FFF'}
           title={'Final Confirmation'}
         >
-          <div style={{ fontSize: '8px' }}>
+          <div style={{ fontSize: '10px' }}>
             You&apos;re about to issue a certificate for Sam&apos;s Batteries
             based on the details and checks provided. Please review the summary
             one last time to ensure accuracy.
@@ -63,15 +63,15 @@ export default function Summary({ inputs, setStage, handleSubmit }) {
           background={'#FFF'}
           title={'Supplier Details'}
         >
-          <div style={{ fontSize: '6px' }}>
+          <div style={{ fontSize: '8px' }}>
             <b>Company Name: </b>
             {inputs.name}
           </div>
-          <div style={{ fontSize: '6px' }}>
+          <div style={{ fontSize: '8px' }}>
             <b>Company House No.: </b>
             {inputs.houseNo}
           </div>
-          <div style={{ fontSize: '6px' }}>
+          <div style={{ fontSize: '8px' }}>
             <b>Company Email: </b>
             {inputs.email}
           </div>
@@ -145,7 +145,13 @@ export default function Summary({ inputs, setStage, handleSubmit }) {
           >
             {'<'}
           </Button>
-          <Button onClick={handleSubmit}>{'Confirm >'}</Button>
+          <Button
+            onClick={(e) => {
+              e.preventDefault()
+            }}
+          >
+            {'Confirm >'}
+          </Button>
         </Row>
       </Grid.Panel>
     </Grid>

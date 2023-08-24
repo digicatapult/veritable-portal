@@ -21,9 +21,11 @@ export default function Issue() {
     })
   }, [inputs])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, isFinal = false) => {
     e.preventDefault()
     isFetching(true)
+
+    if (isFinal) return setInputs({})
 
     const { checks, ...data } = Object.fromEntries(new FormData(e.target))
 
