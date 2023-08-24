@@ -25,8 +25,7 @@ export default function Issue() {
     e.preventDefault()
     isFetching(true)
 
-    if (isFinal) return setInputs({})
-
+    if (isFinal) return setStage(0)
     const { checks, ...data } = Object.fromEntries(new FormData(e.target))
 
     setInputs((prev) => ({

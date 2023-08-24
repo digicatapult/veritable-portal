@@ -34,7 +34,7 @@ const Td = styled('td')`
   align-text: center;
 `
 
-export default function Summary({ inputs, setStage /*, handleSubmit */ }) {
+export default function Summary({ inputs, setStage, handleSubmit }) {
   return (
     <Grid
       gap={'10px'}
@@ -145,13 +145,9 @@ export default function Summary({ inputs, setStage /*, handleSubmit */ }) {
           >
             {'<'}
           </Button>
-          <Button
-            onClick={(e) => {
-              e.preventDefault()
-            }}
-          >
-            {'Confirm >'}
-          </Button>
+          <Button onClick={(e) => {
+            handleSubmit(e, true)
+          }}>{'Confirm >'}</Button>
         </Row>
       </Grid.Panel>
     </Grid>
