@@ -45,7 +45,9 @@ export default function ChecksForm({ inputs, handleSubmit, setStage }) {
         <DropDown
           selected={selected}
           placeholder="select check"
-          update={(val) => setSelected((prev) => [...prev, val])}
+          update={(val) => {
+            setSelected((prev) => [...prev, val])
+          }}
           options={checks.filter((el) => !selected.includes(el))}
         />
         {selected.map((el) => (
@@ -63,7 +65,7 @@ export default function ChecksForm({ inputs, handleSubmit, setStage }) {
                 onChange={(e) => {
                   e.preventDefault()
                   setSelected((prev) => [
-                    ...prev.filter((item) => item.name !== el.name),
+                    ...prev.filter((item) => item.value != el.value),
                     { ...el, expiry: e.target.value },
                   ])
                 }}
@@ -76,9 +78,8 @@ export default function ChecksForm({ inputs, handleSubmit, setStage }) {
                 type="date"
                 name="issuance"
                 onChange={(e) => {
-                  e.preventDefault()
                   setSelected((prev) => [
-                    ...prev.filter((item) => item.name !== el.name),
+                    ...prev.filter((item) => item.value != el.value),
                     { ...el, issuance: e.target.value },
                   ])
                 }}
