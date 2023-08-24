@@ -23,7 +23,8 @@ export default function CompanyDetailsForm({ handleSubmit, inputs }) {
         />
         <Input
           required
-          type="number"
+          type="text"
+          pattern="[0-9]+"
           name={'houseNo'}
           value={inputs.houseNo}
           placeholder="Company house no."

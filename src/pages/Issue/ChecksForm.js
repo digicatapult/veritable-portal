@@ -58,30 +58,33 @@ export default function ChecksForm({ inputs, handleSubmit, setStage }) {
                 value={el.label}
               />
             </Grid.Panel>
+            <Grid.Panel area="issuance">
+              <DatePicker
+                type="date"
+                required
+                name="issuance"
+                onChange={(e) => {
+                  e.preventDefault()
+                  setSelected((prev) => [
+                    ...prev.filter(
+                      (item) => item.name === el.name && item.label === el.label
+                    ),
+                    { ...el, issuance: e.target.value },
+                  ])
+                }}
+              />
+            </Grid.Panel>
             <Grid.Panel area="expiry">
               <DatePicker
                 onChange={(e) => {
                   e.preventDefault()
                   setSelected((prev) => [
-                    ...prev.filter((item) => item.name !== el.name),
+                    ...prev.filter((item) => item.name === el.name),
                     { ...el, expiry: e.target.value },
                   ])
                 }}
                 name="expiry"
                 type="date"
-              />
-            </Grid.Panel>
-            <Grid.Panel area="issuance">
-              <DatePicker
-                type="date"
-                name="issuance"
-                onChange={(e) => {
-                  e.preventDefault()
-                  setSelected((prev) => [
-                    ...prev.filter((item) => item.name !== el.name),
-                    { ...el, issuance: e.target.value },
-                  ])
-                }}
               />
             </Grid.Panel>
           </Grid>
