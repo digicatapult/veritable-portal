@@ -61,7 +61,7 @@ export default function ChecksForm({ inputs, handleSubmit, setStage }) {
               />
             </Grid.Panel>
             <Grid.Panel area="expiry">
-              <label for='expiry'>expiry</label>
+              <label htmlFor="expiry">expiry</label>
               <DatePicker
                 name="expiry"
                 id="expiry"
@@ -75,7 +75,7 @@ export default function ChecksForm({ inputs, handleSubmit, setStage }) {
               />
             </Grid.Panel>
             <Grid.Panel area="issuance">
-              <label for='issuance'>issuance</label>
+              <label htmlFor="issuance">issuance</label>
               <DatePicker
                 type="date"
                 required
