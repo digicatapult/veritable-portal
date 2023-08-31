@@ -52,49 +52,19 @@ export default function OPT({ handleInputs }) {
           }}
         >
           <InputRow>
-            <Input
-              type="text"
-              pattern="[0-9]"
-              name="opt-digit-1"
-              maxLength={1}
-              required
-            />
-            <Input
-              type="text"
-              pattern="[0-9]"
-              name="opt-digit-2"
-              maxLength={1}
-              required
-            />
-            <Input
-              type="text"
-              pattern="[0-9]"
-              name="opt-digit-3"
-              maxLength={1}
-              required
-            />
-            <Font>{'-'}</Font>
-            <Input
-              type="text"
-              pattern="[0-9]"
-              name="opt-digit-4"
-              maxLength={1}
-              required
-            />
-            <Input
-              type="text"
-              pattern="[0-9]"
-              name="opt-digit-5"
-              maxLength={1}
-              required
-            />
-            <Input
-              type="text"
-              pattern="[0-9]"
-              name="opt-digit-6"
-              maxLength={1}
-              required
-            />
+            {new Array(7).fill(undefined).map((_, i) => {
+              if (i === 3) return <Font>{'-'}</Font>
+              return (
+                <Input
+                  type="text"
+                  pattern="[0-9]"
+                  key={`opr-${i}`}
+                  name={`opt-digit-${i}`}
+                  maxLength={1}
+                  required
+                />
+              )
+            })}
           </InputRow>
           <br />
           <Button>{'>'}</Button>
