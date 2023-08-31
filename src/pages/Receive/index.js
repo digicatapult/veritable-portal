@@ -23,7 +23,7 @@ const Font = styled('div')`
 
 export default function Receive() {
   const [inputs, setInputs] = React.useState({})
-  const [stage, setStage] = React.useState(1)
+  const [stage, setStage] = React.useState(0)
   // const [credential, setCredential] = React.useState(null)
   const [fetching, isFetching] = React.useState(false)
   const [verified, setVerified] = React.useState(false)
