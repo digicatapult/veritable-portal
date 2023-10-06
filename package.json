@@ -1,6 +1,6 @@
 {
   "name": "@digicatapult/veritable-portal",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "User interface for veritable project",
   "homepage": "https://digicatapult.github.io/veritable-portal/",
   "main": "src/index.js",
@@ -69,7 +69,7 @@
     "webpack-dev-server": "^4.9.3"
   },
   "dependencies": {
-    "@digicatapult/ui-component-library": "^0.7.8",
+    "@digicatapult/ui-component-library": "^0.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.5.0",
